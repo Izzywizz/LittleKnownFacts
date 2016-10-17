@@ -17,7 +17,7 @@ struct FactModel {
     - returns: String
     */
     func getRandomFact() -> String  {
-        let randomNumber = GKRandomSource.sharedRandom().nextIntWithUpperBound(facts.count)
+        let randomNumber = GKRandomSource.sharedRandom().nextInt(upperBound: facts.count)
         return facts[randomNumber]
     }
     
@@ -27,13 +27,13 @@ struct FactModel {
      - parameter filename: String representation of file with extension included, example "Facts.txt"
      - returns: A new array with all the data from a text file
      */
-    static func linesFromResource(fileName: String) -> [String] {
-        guard let path = NSBundle.mainBundle().pathForResource(fileName, ofType: nil) else {
+    static func linesFromResource(_ fileName: String) -> [String] {
+        guard let path = Bundle.main.path(forResource: fileName, ofType: nil) else {
             fatalError("Resource file for \(fileName) not found.")
         }
         do {
-            let content = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-            return content.componentsSeparatedByString("\n")
+            let content = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            return content.components(separatedBy: "\n")
         } catch let error {
             fatalError("Could not load strings from \(path): \(error).")
         }

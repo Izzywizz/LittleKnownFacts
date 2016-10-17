@@ -21,7 +21,7 @@ struct ColourModel {
     ]
     
     func getRandomColour() -> UIColor   {
-        let randomNumber = GKRandomSource.sharedRandom().nextIntWithUpperBound(colours.count)
+        let randomNumber = GKRandomSource.sharedRandom().nextInt(upperBound: colours.count)
         
         return colours[randomNumber]
     }
